@@ -15,7 +15,7 @@ public class Main {
 	public static void main(String[] args) {
 		Main main = new Main();
 
-		//main.testStream();
+		// main.testStream();
 		main.testOrderPerson();
 	}
 
@@ -54,7 +54,8 @@ public class Main {
 	}
 
 	/**
-	 * Ordernar por lambda
+	 * Ordernar por lambda<p>
+	 * https://dosideas.com/noticias/java/983-java-8-mas-alla-de-los-lambdas
 	 */
 	public void testOrderPerson() {
 
@@ -87,5 +88,36 @@ public class Main {
 			System.out.println(p.getNombre());
 		}
 
+		// Ordenar con lambda y funcion no estatica
+
+		milista = new ArrayList<Person>();
+		milista.add(new Person("Miguel"));
+		milista.add(new Person("Alicia"));
+
+		Collections.sort(milista, this::comparePerson);
+
+		for (Person p : milista) {
+			System.out.println(p.getNombre());
+		}
+
+		// Ordenar con lambda y funcion estatica
+
+		milista = new ArrayList<Person>();
+		milista.add(new Person("Miguel"));
+		milista.add(new Person("Alicia"));
+
+		Collections.sort(milista, Main::comparePersonStatic);
+
+		for (Person p : milista) {
+			System.out.println(p.getNombre());
+		}
+	}
+
+	public int comparePerson(Person p1, Person p2) {
+		return p1.getNombre().compareTo(p2.getNombre());
+	}
+
+	public static int comparePersonStatic(Person p1, Person p2) {
+		return p1.getNombre().compareTo(p2.getNombre());
 	}
 }
